@@ -1,0 +1,131 @@
+<h3>Review Past Workouts</h3>
+
+<section class="container pb-5">
+  <h2 class="py-2">Datepicker in Bootstrap 5</h2>
+  <form class="row">
+    <label for="date" class="col-1 col-form-label">Date:</label>
+    <div class="col-5">
+      <div class="input-group date" id="datepicker">
+        <input type="text" class="form-control" id="date"/>
+        <span class="input-group-append">
+          <span class="input-group-text bg-light d-block">
+            <i class="fa fa-calendar"></i>
+          </span>
+        </span>
+      </div> 
+    </div>
+    <div class="col-xl-4">
+        <button class="btn btn-primary btn-lg mb-2 mt-4 border-dark" type="submit" id="dateButton"><b>Lookup</b></button>
+    </div>
+  </form>
+</section>
+
+<script>
+    document.getElementById('dateButton').addEventListener('click', printDate)
+
+    function printDate () {
+        let inputDate = document.getElementById('date').value
+
+        console.log(inputDate)   
+    }
+
+    module.exports = printDate;
+</script>
+
+<div class="container">
+    <div class="row w-100">
+        <div class="col">
+            <h3 class="mt-5">Welcome {{name}}</h3>
+            <p>Here is your current workout</p>
+            {{#if workouts}}
+                <table class="table table-striped table-hover table-bordered table-secondary">
+                    <thead>
+                        <tr>
+                            <th scope="col">Exercise</th>
+                            <th scope="col">Attempts</th>
+                            <th scope="col">Send</th>
+                            <th scope="col">Grade</th>
+                            <th scope="col">Angle</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each workouts}}
+                            <tr>
+                                <td>{{exercise}}</td>
+                                <td>{{attempts}}</td>
+                                <td>{{send}}</td>
+                                <td>{{grade}}</td>
+                                <td>{{angle}}</td>
+                                <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+                                <td>
+                                    <div class="container-fluid">
+                                        <div class="row float-start">
+                                            <div class="col-3">
+                                                <a href="/review/{{_id}}" class="btn bg-success"><i class="fas fa-edit"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="container-fluid">
+                                                <form action="/review/{{_id}}" method="POST" id="delete-form"> {{!--using Method Override--}}
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="btn bg-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <p>You have not created any workouts. Add one now!</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
+    
+
+{{!-- <div class="container bg-secondary w-50 float-start">
+     <div class="row">
+        <form action="/new/{{workout._id}}" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+           <div class="col-xl-4 mt-2">
+                <select class="form-select" name="exercise" id="exercise">
+                    <option value="{{workout.exercise}}">{{workout.exercise}}</option>
+                    <option value="Hovers">Hovers</option>
+                    <option value="One Touch">One Touch</option>
+                    <option value="Rooting Feet">Rooting Feet</option>
+                </select>
+           </div>
+           <div class="col-xl-4 mt-2">
+                <select class="form-select" name="attempts" id="attempts">
+                    <option value="{{workout.attempts}}">{{workout.attempts}}</option>
+                    <option value="Flash">Flash</option>
+                    <option value="Onsight">Onsight</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+           </div>
+           <div class="col-xl-4 mt-2 mb-2">
+                <select class="form-select" name="grade" id="grade">
+                    <option value="{{workout.grade}}">{{workout.grade}}</option>
+                    <option value="V0">V0</option>
+                    <option value="V1">V1</option>
+                    <option value="V2">V2</option>
+                </select>
+           </div>
+
+            <div class="col-xl-4">
+                <button class="w-100 btn btn-primary btn-lg mb-2 mt-4" type="submit"><b>Submit</b></button>
+            </div>
+           
+        </form>
+     </div>
+</div> --}}
+

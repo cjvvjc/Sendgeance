@@ -1,0 +1,19 @@
+p {
+    margin: 10px 0 !important;
+}
+
+.login-container {
+    width: 400px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.bg-image {
+    /* background-image: url(/images/sport_climbing.jpeg); */
+    background-image: url(/images/background_bw.jpg);
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center; 
+}
